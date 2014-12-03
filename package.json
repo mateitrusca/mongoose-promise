@@ -1,11 +1,11 @@
 {
-  "name": "mongoose-q",
+  "name": "mongoose-promise",
   "version": "0.0.13",
-  "description": "kriskowal's Q support for mongoose",
-  "author": "Dongsu Jang <iolothebard@gmail.com>",
+  "description": "Native or Bluebird Promise support for mongoose",
+  "author": "Matei Trusca <matei.trusca@kalon.ro>",
   "repository": {
     "type": "git",
-    "url": "git://git@github.com/iolo/mongoose-q.git"
+    "url": "git://git@github.com/mateitrusca/mongoose-promise.git"
   },
   "license": "MIT",
   "engines": {

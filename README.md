@@ -1,7 +1,9 @@
-mongoose-q
-==========
+mongoose-promise
+===============
 
-[kriskowal's Q](http://documentup.com/kriskowal/q/) support for [mongoose](http://mongoosejs.com).
+Native or Bluebird Promise support for [mongoose](http://mongoosejs.com).
+
+Forked from [iolo/mongoose-q](https://github.com/iolo/mongoose-q)
 
 for [mongodb native nodejs driver](http://mongodb.github.io/node-mongodb-native/), see [mongo-q](http://github.com/iolo/mongo-q).
 
@@ -11,12 +13,12 @@ usage
 ### to apply Q with default suffix 'Q':
 
 ```javascript
-var mongoose = require('mongoose-q')(require('mongoose'));
-// verbose way: mongooseQ is unused
+var mongoose = require('mongoose-promise')(require('mongoose'));
+// verbose way: mongoosePromise is unused
 var mongoose = require('mongoose'),
-    mongooseQ = require('mongoose-q')(mongoose)
-// shortest way: mongoose will be loaded by mongoose-q
-var mongoose = require('mongoose-q')();
+    mongoosePromise = require('mongoose-promise')(mongoose)
+// shortest way: mongoose will be loaded by mongoose-promise
+var mongoose = require('mongoose-promise')();
 ```
 
 ### use Q-applied `model` statics:
@@ -61,7 +63,7 @@ SomeModel.aggregate(...).project(...).group(...).match(...).skip(...).limit(...)
 ### to apply Q with custom `suffix`/`prefix`:
 
 ```javascript
-var mongoose = require('mongoose-q')(require('mongoose'), {prefix:'promiseOf_', suffix:'_withQ'});
+var mongoose = require('mongoose-promise')(require('mongoose'), {prefix:'promiseOf_', suffix:'_withQ'});
 SomeModel.promiseOf_findAndUpdate_withQ(...)
   .then(function (result) { ... })
   .catch(function (err) { ... })
@@ -74,7 +76,7 @@ SomeModel.promiseOf_findAndUpdate_withQ(...)
 function customMapper(name) {
   return 'q' + name.charAt(0).toUpperCase() + name.substring(1);
 }
-var mongoose = require('mongoose-q')(require('mongoose'), {mapper:customMapper});
+var mongoose = require('mongoose-promise')(require('mongoose'), {mapper:customMapper});
 SomeModel.qFindAndUpdate(...)
   .then(function (result) { ... })
   .catch(function (err) { ... })
@@ -84,7 +86,7 @@ SomeModel.qFindAndUpdate(...)
 ### to apply Q with `spread`:
 
 ```javascript
-var mongoose = require('mongoose-q')(require('mongoose'), {spread:true});
+var mongoose = require('mongoose-promise')(require('mongoose'), {spread:true});
 SomeModel.updateQ(...)
   .spread(function (affectedRows, raw) { ... })
   .catch(function (err) { ... })
@@ -120,6 +122,6 @@ SomeModel.findByName('foo').then(function(result) {
   console.log(result);
 });
 ```
-> NOTE: this is not a feature of mongoose-q
+> NOTE: this is not a feature of mongoose-promise
 
 That's all folks!
