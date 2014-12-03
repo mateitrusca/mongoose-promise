@@ -1,7 +1,7 @@
 'use strict';
 
 var
-  Q = require('q'),
+  Promise = require('native-or-bluebird'),
   MONGOOSE_MODEL_STATICS = [
     // mongoose.Model static
     'remove', 'ensureIndexes', 'find', 'findById', 'findOne', 'count', 'distinct',
@@ -36,8 +36,8 @@ var
 /**
  *
  * @param {object} obj
- * @param {Array.<string>} funcNames - original function names to apply Q
- * @param {function(string):string} funcNameMapper maps a function name into Q-applied one
+ * @param {Array.<string>} funcNames - original function names to apply Promise
+ * @param {function(string):string} funcNameMapper maps a function name into Promise-applied one
  * @param {*} [spread=false] use spread for multi-results
  */
 function qualify(obj, funcNames, funcNameMapper, spread) {
@@ -49,7 +49,7 @@ function qualify(obj, funcNames, funcNameMapper, spread) {
     var mappedFuncName = funcNameMapper(funcName);
     DEBUG && debug('wrap function:', funcName, '-->', mappedFuncName);
     obj[mappedFuncName] = function () {
-      var d = Q.defer();
+      var d = Promise.defer();
       var args = apslice.call(arguments);
       args.push(function (err, result) {
         if (err) {
@@ -71,7 +71,7 @@ function qualify(obj, funcNames, funcNameMapper, spread) {
 }
 
 /**
- * add Q wrappers for static/instance functions of mongoose model and query.
+ * add Promise wrappers for static/instance functions of mongoose model and query.
  *
  * @param {mongoose.Mongoose} [mongoose]
  * @param {object.<string,*>} [options={}] - prefix and/or suffix for wrappers

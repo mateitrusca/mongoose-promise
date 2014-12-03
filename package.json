@@ -12,7 +12,7 @@
     "node": "~0.10"
   },
   "dependencies": {
-    "q": "^1.0.0",
+    "native-or-bluebird": "^1.1.2",
     "mongoose": "^3.8.3"
   },
   "devDependencies": {
